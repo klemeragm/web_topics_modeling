@@ -2,7 +2,7 @@ import tweepy
 import configparser
 
 config = configparser.ConfigParser()
-config.read("./credentials/config.ini")
+config.read("./credentials/config.ini_example") # 
 
 
 def connectToTwitterAPI():
