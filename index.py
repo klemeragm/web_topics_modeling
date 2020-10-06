@@ -1,6 +1,8 @@
 from MyMongoDatabase import MyMongoDatabase
 from connection import connectToTwitterAPI
-import tweepy
+import json
+import csv
+import oauth2 as auth
 
 #pacotes para o csv
 import pandas as pd
@@ -11,7 +13,7 @@ from keys import consumer_key, consumer_key_secret,access_token, access_token_se
 try:
     myMongo = MyMongoDatabase('topicoswebbd')
     api = connectToTwitterAPI()
-    tweetsList = tweepy.Cursor(api.search, q="covid OR Covid19 OR Covid OR covid19").items(10) #texto que vai ser mapeado entre " "
+    tweetsList = tweepy.Cursor(api.search, q="covid OR Covid19 OR Covid OR covid19 OR pandemia OR epidemia").items(10) #texto que vai ser mapeado entre " "
     for tweet in tweetsList:
         myMongo.insert(
             "tweets", {'author': tweet.author.screen_name, 'text': tweet.text})
